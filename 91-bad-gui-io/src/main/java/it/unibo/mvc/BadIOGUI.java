@@ -42,12 +42,14 @@ public class BadIOGUI {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
         final JButton write = new JButton("Write on file");
+        final JButton read = new JButton("Read on file");
 
         //Ex 01.01
         final JPanel centralLayout = new JPanel();
         centralLayout.setLayout(new BoxLayout(centralLayout, BoxLayout.X_AXIS));
         canvas.add(centralLayout, BorderLayout.CENTER);
         centralLayout.add(write);
+        centralLayout.add(read);
 
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,6 +72,20 @@ public class BadIOGUI {
                     JOptionPane.showMessageDialog(frame, e1, "Error", JOptionPane.ERROR_MESSAGE);
                     e1.printStackTrace(); // NOPMD: allowed as this is just an exercise
                 }
+            }
+        });
+
+        read.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                /*
+                 * This would be VERY BAD in a real application.
+                 * 
+                 * This makes the Event Dispatch Thread (EDT) work on an I/O
+                 * operation. I/O operations may take a long time, during which
+                 * your UI becomes completely unresponsive.
+                 */
+                System.out.println("Stringa");
             }
         });
     }
