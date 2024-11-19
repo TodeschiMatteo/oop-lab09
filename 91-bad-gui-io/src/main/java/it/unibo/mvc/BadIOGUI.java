@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Random;
 
@@ -41,13 +42,11 @@ public class BadIOGUI {
     public BadIOGUI() {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
-        final JButton write = new JButton("Write on file");
-        final JButton read = new JButton("Read on file");
-
-        //Ex 01.01
         final JPanel centralLayout = new JPanel();
         centralLayout.setLayout(new BoxLayout(centralLayout, BoxLayout.X_AXIS));
         canvas.add(centralLayout, BorderLayout.CENTER);
+        final JButton write = new JButton("Write on file");
+        final JButton read = new JButton("Read on file");
         centralLayout.add(write);
         centralLayout.add(read);
 
@@ -86,11 +85,11 @@ public class BadIOGUI {
                  * your UI becomes completely unresponsive.
                  */
                 try {
-                    final List<String> lines = Files.readAllLines(new File(PATH).toPath());
-                    System.out.println(lines);
+                    final List<String> lines = Files.readAllLines(Path.of(PATH));
+                    System.out.println(lines); // NOPMD required by instructions
                 } catch (IOException e1) {
                     JOptionPane.showMessageDialog(frame, e1, "Error", JOptionPane.ERROR_MESSAGE);
-                    e1.printStackTrace();
+                    e1.printStackTrace(); // NOPMD suppressed as it is a false positive
                 }
             }
         });
