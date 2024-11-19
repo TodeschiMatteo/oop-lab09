@@ -85,7 +85,13 @@ public class BadIOGUI {
                  * operation. I/O operations may take a long time, during which
                  * your UI becomes completely unresponsive.
                  */
-                System.out.println("Stringa");
+                try {
+                    final List<String> lines = Files.readAllLines(new File(PATH).toPath());
+                    System.out.println(lines);
+                } catch (IOException e1) {
+                    JOptionPane.showMessageDialog(frame, e1, "Error", JOptionPane.ERROR_MESSAGE);
+                    e1.printStackTrace();
+                }
             }
         });
     }
