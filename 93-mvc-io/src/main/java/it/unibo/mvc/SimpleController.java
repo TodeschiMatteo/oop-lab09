@@ -8,11 +8,11 @@ import java.util.LinkedList;
  */
 public final class SimpleController implements Controller {
 
-    private String next = null;
-    private List<String> history = new LinkedList<>();
+    private String next = "";
+    private final List<String> history = new LinkedList<>();
 
     @Override
-    public void setNextString(String data) {
+    public void setNextString(final String data) {
         this.next = data;
     }
 
@@ -23,7 +23,7 @@ public final class SimpleController implements Controller {
 
     @Override
     public void printString() {
-        if (this.next == null || this.next == "") {
+        if (this.next.isBlank()) {
             throw new IllegalStateException("No string avaible");
         }
         history.add(this.next);

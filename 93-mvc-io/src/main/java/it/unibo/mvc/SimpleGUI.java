@@ -25,31 +25,27 @@ public final class SimpleGUI {
      * Define the GUI.
      */
     public SimpleGUI() {
-        Controller controller = new SimpleController();
-
+        final Controller controller = new SimpleController();
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
         final JTextField field = new JTextField(null);
         final JTextArea area = new JTextArea();
         final JPanel buttonsBar = new JPanel();
-
         canvas.setLayout(new BorderLayout());
         final JButton print = new JButton("Print");
         buttonsBar.add(print, BorderLayout.WEST);
         final JButton history = new JButton("Show history");
         buttonsBar.add(history, BorderLayout.EAST);
-        
         canvas.add(field, BorderLayout.NORTH);
         canvas.add(area, BorderLayout.CENTER);
         canvas.add(buttonsBar, BorderLayout.SOUTH);
-
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         print.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                String s = field.getText();
+                final String s = field.getText();
                 controller.setNextString(s);
                 controller.printString();
                 field.setText(null);
@@ -59,12 +55,12 @@ public final class SimpleGUI {
         history.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                String text = "";
-                String lineSeparator = System.lineSeparator();
-                for (String s : controller.getHistory()) {
-                    text = text + s + lineSeparator;
+                final StringBuilder text = new StringBuilder();
+                final String lineSeparator = System.lineSeparator();
+                for (final String s : controller.getHistory()) {
+                    text.append(s).append(lineSeparator);
                 }
-                area.setText(text);
+                area.setText(text.toString());
             }
         });
     }
@@ -98,6 +94,10 @@ public final class SimpleGUI {
         frame.setVisible(true);
     }
 
+    /**
+     * Launch the GUI.
+     * @param args
+     */
     public static void main(final String... args) {
         new SimpleGUI().display();
     }

@@ -6,7 +6,6 @@ import java.util.List;
  * Controller Interface.
  */
 public interface Controller {
-    
     /**
      * Set the next String to be printed.
      * @param data
